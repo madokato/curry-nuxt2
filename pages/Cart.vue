@@ -43,7 +43,7 @@
                 </v-col>
             </v-row>
             <div id="orderForm">
-            <!-- <Order v-show="!show"/> -->
+            <Order v-show="!show"/>
             </div>
         </div>
         <div v-else>

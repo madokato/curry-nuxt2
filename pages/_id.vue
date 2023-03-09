@@ -27,7 +27,8 @@
           <label class="radio-inline">
             <input type="radio" name="responsibleCompany" checked="checked" />
             <span> 普通 {{ item.price.toLocaleString("ja-JP") }}円（税抜）</span
-            ><br /> </label
+            >
+            <br /> </label
           ><br />
           <div>
             <span style="font-weight: bold">数量：</span>
@@ -61,34 +62,44 @@
 </template>
 
 <script>
-export default {
-data(){
-        return {
-            item:'',
-            items:this.$store.state.itemData,
-            id:'',
-            number:1
-        }
-    },
-    created(){
-        console.log("created")
-        let paramId = this.$route.params.item_id;
-        this.items.forEach(item => {
-            if(item.id===paramId){
-                this.item = item
-            }
-        })
-    },
-    methods:{
-        ...mapActions(['addItemToCart']),
-        addCart(){
-            if(confirm(`${this.item.name}を${this.number}個追加しますがよろしいですか？`)){
-                this.addItemToCart({itemId:this.item.id,number:this.number}).then(()=>{
-                    this.$router.push('/cart')
-                })
-            }
-        }
+import { mapActions } from "vuex";
 
-    }
-}
+export default {
+  data() {
+    return {
+      item: "",
+      items: this.$store.state.itemData,
+      id: "",
+      number: 1,
+    };
+  },
+  created() {
+    console.log("created");
+    let paramId = Number(this.$route.params.id);
+    console.log("paramId",paramId, typeof paramId);
+    console.log("items",this.items)
+    this.items.find((item) => {
+      if (item.id === paramId) {
+        console.log("item",item)
+        this.item = item;
+      }
+    });
+  },
+  methods: {
+    ...mapActions(["addItemToCart"]),
+    addCart() {
+      if (
+        confirm(
+          `${this.item.name}を${this.number}個追加しますがよろしいですか？`
+        )
+      ) {
+        this.addItemToCart({ itemId: this.item.id, number: this.number }).then(
+          () => {
+            this.$router.push("/cart");
+          }
+        );
+      }
+    },
+  },
+};
 </script>

@@ -2,8 +2,9 @@
 <v-app>
         <Header></Header>
         <SideNav></SideNav>
-    
+        <v-main>
                 <Nuxt />
+              </v-main>
                 <Footer></Footer>
         
 </v-app>
@@ -12,9 +13,6 @@
 
 <script>
 
-// import Header from '@/components/Header.vue'
-// import Footer from '@/components/Footer.vue'
-// import SideNav from '@/components/SideNav.vue'
 import firebase from '../plugins/firebase'
 
 import { mapActions } from 'vuex'
@@ -22,12 +20,6 @@ import 'firebase/auth'
 
 
 export default {
-  name: 'App',
-//   components:{
-//     Header,
-//     SideNav,
-//     Footer,
-//   },
   methods:{
     ...mapActions(['setLoginUser','deleteLoginUser','fetchOrderItems','clearOrderItems'])
   },
